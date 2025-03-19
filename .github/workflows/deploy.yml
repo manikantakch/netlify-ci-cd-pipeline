@@ -3,7 +3,7 @@ name: Deploy Next.js to Netlify
 on:
   push:
     branches:
-      - main  # Change to 'master' or any branch you want to deploy
+      - main
   pull_request:
     branches:
       - main
@@ -26,14 +26,14 @@ jobs:
 
       - name: Debug Test Files (Ensure Jest Finds Tests)
         run: |
-          echo "Checking test directory..."
-          ls -R tests || echo "No tests directory found"
-          echo "Checking src/__tests__ directory..."
-          ls -R src/__tests__ || echo "No tests found in src/__tests__"
+          echo "Checking for test files..."
+          find . -type f -name "*.test.js" || echo "No test files found"
+          echo "Jest config check:"
+          npx jest --showConfig | grep testMatch || echo "No testMatch found"
 
       - name: Run tests
         run: |
-          npm test -- --ci --runInBand --verbose || exit 1
+          npm test -- --ci --runInBand --verbose --testMatch "**/*.test.js" || exit 1
         continue-on-error: false  # Ensure job fails if tests fail
 
       - name: Build project
