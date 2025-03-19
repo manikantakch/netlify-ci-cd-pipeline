@@ -24,8 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Debug Test Files (Ensure Jest Finds Tests)
+        run: |
+          echo "Checking test directory..."
+          ls -R tests || echo "No tests directory found"
+          echo "Checking src/__tests__ directory..."
+          ls -R src/__tests__ || echo "No tests found in src/__tests__"
+
       - name: Run tests
-        run: npm test # Ensure your tests are passing
+        run: |
+          npm test -- --ci --runInBand --verbose || exit 1
+        continue-on-error: false  # Ensure job fails if tests fail
 
       - name: Build project
         run: npm run build
