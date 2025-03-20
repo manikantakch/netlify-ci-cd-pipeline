@@ -10,7 +10,7 @@ const MockIcon = () => <svg data-testid="mock-icon" />;
 describe("Badge Component", () => {
   test("renders correctly with default props", () => {
     render(<Badge text="Default Badge" />);
-    const badge = screen.getByText("Default Badge");
+    // const badge = screen.getByText("Default Badge");
     expect(badge).toBeInTheDocument();
     expect(badge).toHaveClass("bg-blue-500 text-white text-sm px-3 py-1.5");
   });
