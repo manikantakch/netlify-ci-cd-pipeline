@@ -39,14 +39,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2
-        with:
-          publish-dir: ".next"
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deployed via GitHub Actions 🚀"
-          enable-pull-request-comment: false
-          enable-commit-comment: false
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+      # - name: Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v2
+      #   with:
+      #     publish-dir: ".next"
+      #     production-branch: main
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     deploy-message: "Deployed via GitHub Actions 🚀"
+      #     enable-pull-request-comment: false
+      #     enable-commit-comment: false
+      #     netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
