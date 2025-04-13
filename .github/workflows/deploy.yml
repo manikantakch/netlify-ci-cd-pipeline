@@ -3,10 +3,14 @@ name: Deploy Next.js to Netlify
 on:
   push:
     branches:
-      - main
+      - prod
+      - stage
+      - uat
   pull_request:
     branches:
-      - main
+      - prod
+      - stage
+      - uat
 
 jobs:
   build-and-deploy:
@@ -38,6 +42,20 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Determine Environment Variables
+        run: |
+         if [[ "${{ github.ref }}" == "refs/heads/prod" ]]; then
+          echo "ENV=production" >> $GITHUB_ENV
+          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_PROD_SITE_ID }}" >> $GITHUB_ENV
+         elif [[ "${{ github.ref }}" == "refs/heads/stage" ]]; then
+          echo "ENV=staging" >> $GITHUB_ENV
+          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_STAGE_SITE_ID }}" >> $GITHUB_ENV
+         elif [[ "${{ github.ref }}" == "refs/heads/uat" ]]; then
+          echo "ENV=uat" >> $GITHUB_ENV
+          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_UAT_SITE_ID }}" >> $GITHUB_ENV
+         fi
+         echo "Deploying to $ENV environment..."
 
       # - name: Deploy to Netlify
       #   uses: nwtgck/actions-netlify@v2

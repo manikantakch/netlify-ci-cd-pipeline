@@ -1,0 +1,22 @@
+.title-wrapper {
+  @apply px-6 pt-4 pb-[30px] h-[110px];
+}
+.top-wrap {
+  @apply text-xl text-text-grey-900 mb-4 flex justify-between items-center;
+}
+.top-right-wrap {
+  @apply z-0 flex gap-2;
+}
+.image-bg {
+  @apply cursor-pointer flex items-center justify-center bg-white-900 w-8 h-8 rounded-full hover:shadow-lg;
+}
+.sub-title {
+  @apply text-sm text-text-grey-800 font-medium;
+}
+.download_Search_icons {
+  @apply bg-white-900 w-[32px] h-[32px] rounded-full flex items-center justify-center cursor-pointer;
+}
+
+.buttons_wrap {
+  @apply flex gap-4 items-center z-[999];
+}
